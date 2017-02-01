@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nowcoder.dao.MessageDao">
+    <sql id="table">message</sql>
+    <sql id="selectFields">id,from_id, to_id, content, conversation_id,has_read, created_date, count(id) as cnt
+    </sql>
+    <select id="getConversationList" resultType="com.nowcoder.model.Message">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table" />
+        <if test="userId != 0">
+            WHERE from_id = #{userId} or to_id = #{userId} group by conversation_id DESC ORDER BY id DESC ;
+        </if>
+    </select>
+</mapper>
