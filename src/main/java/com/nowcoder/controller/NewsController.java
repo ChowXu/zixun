@@ -2,6 +2,7 @@ package com.nowcoder.controller;
 
 import com.nowcoder.model.*;
 import com.nowcoder.service.CommentService;
+import com.nowcoder.service.LikeService;
 import com.nowcoder.service.NewsService;
 import com.nowcoder.service.UserService;
 import com.nowcoder.util.ToutiaoUtil;
@@ -38,6 +39,8 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
+    @Autowired
+    private LikeService likeService;
 
     @Autowired
     private HostHolder hostHolder;
@@ -90,7 +93,6 @@ public class NewsController {
     public String newDetail(@PathVariable("newsId") String newsId, Model model) {
         News news = newsService.getById(newsId);
         if (news != null) {
-            // comment
             List<Comment> comments = commentService.getCommentsByEntity(news.getId(), EntityType.ENTITY_NEWS.getindex());
             List<ViewObject> commentVOs = new ArrayList<>();
             for (Comment comment : comments) {
@@ -101,6 +103,11 @@ public class NewsController {
             }
             model.addAttribute("comments", commentVOs);
 
+            int localUserId = hostHolder.getUser() != null ? hostHolder.getUser().getId() : 0;
+            if (localUserId != 0) {
+                model.addAttribute("like", likeService.getLikeStatus(localUserId, EntityType.ENTITY_NEWS.getindex(), Integer.valueOf(newsId)));
+            } else
+                model.addAttribute("like", 0);
         }
         User user = newsService.getUser(newsId);
         model.addAttribute("owner", user);

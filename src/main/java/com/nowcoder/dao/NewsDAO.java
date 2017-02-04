@@ -28,13 +28,15 @@ public interface NewsDAO {
     @Select({"select", SELECT_FIELDS, "from", TABLE_NAME, "where id = #{newsId}"})
     News selectById(String newsId);
 
-    @Select({"select", SELECT_USER_FIELDS, "from", USER_TABLE_NAME, "where id in ", "( select user_id from", TABLE_NAME,"where id = #{newsId})"})
+    @Select({"select", SELECT_USER_FIELDS, "from", USER_TABLE_NAME, "where id in ", "( select user_id from", TABLE_NAME, "where id = #{newsId})"})
     User selectUserByNewsId(String newsId);
 
     @Update({"update ", TABLE_NAME, " set comment_count = #{count} where id = #{entityId}"})
-    int updateCommentCount(@Param("entityId")int entityId,
-                            @Param("count") int count);
+    int updateCommentCount(@Param("entityId") int entityId,
+                           @Param("count") int count);
 
 
+    @Update({"update ", TABLE_NAME, " set like_count = #{likeCount} where id = #{newsId}"})
+    void updateLikeCont(@Param("newsId")int newsId, @Param("likeCount")int likeCount);
 }
 

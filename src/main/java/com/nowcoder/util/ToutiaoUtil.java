@@ -1,7 +1,6 @@
 package com.nowcoder.util;
 
 import com.alibaba.fastjson.JSONObject;
-import com.nowcoder.controller.LoginController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
