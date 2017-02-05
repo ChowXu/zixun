@@ -53,8 +53,6 @@ public class LikeService {
     }
 
 
-    public static void main(String[] args) {
 
-    }
 
 }

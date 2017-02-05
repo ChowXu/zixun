@@ -26,6 +26,9 @@ public class EventModel {
         return type;
     }
 
+    public EventModel() {
+    }
+
     public EventModel setType(EventType type) {
         this.type = type;
         return this;

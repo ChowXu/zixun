@@ -75,6 +75,7 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware 
 
             }
         });
+        thread.start();
 
     }
 

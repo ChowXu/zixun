@@ -30,7 +30,8 @@ CREATE TABLE `login_ticket` (
   `expired` DATETIME NOT NULL,
   `status` INT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `ticket_UNIQUE` (`ticket` ASC));
+  UNIQUE INDEX `ticket_UNIQUE` (`ticket` ASC)
+  );
 
 
 DROP TABLE IF EXISTS `comment`;
@@ -56,6 +57,6 @@ CREATE TABLE `news`.`message` (
 `has_read` INT NOT NULL DEFAULT 0,
 `conversation_id` VARCHAR(45) NOT NULL,
 PRIMARY KEY (`id`),
-ADD INDEX `conversation` (`conversation_id`, DESC)
+INDEX `conversation` (`conversation_id` DESC)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
